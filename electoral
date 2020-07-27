@@ -1,0 +1,20 @@
+#----------------------Ejercicio 4-----------------------	
+
+votantes = []
+
+print ("Ingrese los nombres de los botantes, escriba un numero para salir")
+
+while True:
+	nombre = input("\n")
+	if nombre.isdigit():
+		break
+	else:
+		nombre = nombre.strip()
+		nombre = nombre.lower()
+		nombre = nombre.title()
+		votantes.append(nombre)
+	
+for i in votantes:
+	votante = votantes.index(i)
+	print ("\nEstimado ",i,", vote por mi")
+	print ("Votante numero: ", votante+1 )
