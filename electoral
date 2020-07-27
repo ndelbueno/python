@@ -2,7 +2,7 @@
 
 votantes = []
 
-print ("Ingrese los nombres de los botantes, escriba un numero para salir")
+print ("Ingrese los nombres de los votantes, escriba un numero para salir")
 
 while True:
 	nombre = input("\n")
