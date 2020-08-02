@@ -48,7 +48,7 @@ def verificar_letra(): #verifica la letra ingresada, 2 sucesos no la encuentra o
 		limpiar_mostrar(caja_letras, "GANASTE")
 		
 
-#variables
+#listas a modificar durante el juego.
 letras_usadas = []			
 palabra = []
 cantidad_intentos = [1, 2, 3, 4, 5, 6]
