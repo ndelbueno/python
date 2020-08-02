@@ -53,7 +53,7 @@ letras_usadas = []
 palabra = []
 cantidad_intentos = [1, 2, 3, 4, 5, 6]
 letras_encontradas = []
-#lista_palabras = ["thor", "ironman", "hawkeye", "hulk", "blackwidow", "capitan america"]
+#lista_palabras = ["thor", "ironman", "hawkeye", "hulk", "blackwidow", "capitan america"] #lista comentada para usar la que esta abajo durante pruebas.
 lista_palabras = ["ironman"]
 
 
