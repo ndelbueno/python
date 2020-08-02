@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import tkinter as tk
+import random
+
+
+ventana = tk.Tk()
+#funciones
+def limpiar_mostrar(widget,texto): #limpia widgets e ingresa nuevos elementos
+	widget.config(state = "normal")
+	widget.delete(1.0, tk.END)
+	widget.insert(1.0, texto)
+	widget.config(state = "disabled")
+
+def refresh(): #sirve para agregar letras encontradas
+	letras_encontradas.clear()
+	for i in list((adivinar.get(1.0, "end-1c").replace(" ",""))):
+		letras_encontradas.append(i)
+	
+def jugar(): #comienza el juego, toma una palabra de la lista, agregar su longitud en el tk.Text y una lista para verificar a futuro
+	global palabra
+	limpiar_mostrar(caja_letras,"")
+	palabra = random.choice(lista_palabras)
+	for p in palabra:
+		letras_encontradas.append("_")
+	limpiar_mostrar (adivinar, " ".join("_" * len(palabra)))
+
+def verificar_letra(): #verifica la letra ingresada, 2 sucesos no la encuentra o la encuentra. un 3er suceso aparte si encontraste todas las letras
+	letra = ingreso_letra.get()
+	letras_usadas.append(letra)
+	limpiar_mostrar(caja_letras," ".join(letras_usadas))
+	ingreso_letra.delete(0, tk.END)
+	if letra not in palabra:
+		del cantidad_intentos [0]
+		if len(cantidad_intentos) > 0:
+			intentos.set("Intentos: "+str(len(cantidad_intentos))) 
+		else:
+			intentos.set("Intentos: "+str(len(cantidad_intentos))) 
+			limpiar_mostrar(caja_letras,"PERDISTE")
+	else:
+		for y,z in enumerate(palabra):
+			if letra == z:
+				letras_encontradas[y] = z
+				limpiar_mostrar(adivinar," ".join(letras_encontradas))
+				refresh()		
+	if list(palabra) == letras_encontradas:
+		limpiar_mostrar(caja_letras, "GANASTE")
+		
+
+#variables
+letras_usadas = []			
+palabra = []
+cantidad_intentos = [1, 2, 3, 4, 5, 6]
+letras_encontradas = []
+#lista_palabras = ["thor", "ironman", "hawkeye", "hulk", "blackwidow", "capitan america"]
+lista_palabras = ["ironman"]
+
+
+#GUI
+ventana.title ("Ahorcado de Marvel")
+ventana.config(width = 650, height = 400)
+
+boton_jugar = tk.Button(text="Jugar", command = jugar)
+boton_jugar.place (x = 20, y = 20)
+
+adivinar_letra = tk.Button (text = "Ingresa una letra", command = verificar_letra)
+adivinar_letra.place (x = 20, y = 60)
+
+ingreso_letra = tk.Entry ()
+ingreso_letra.place(x = 120, y = 60, width = 15)
+
+intentos = tk.StringVar()
+intentos_label = tk.Label (ventana, textvariable=intentos)
+intentos_label.place (x = 20, y = 100)
+intentos.set("Intentos: "+str(len(cantidad_intentos)))
+
+
+palabra_label = tk.Label (text = "Descubre la palabra")
+palabra_label.place (x = 200, y = 40)
+
+adivinar = tk.Text (background="white", width = 40, height = 1)
+adivinar.place (x = 200, y = 60)
+
+caja_letras = tk.Text (background="white", width = 40, height = 10)
+caja_letras.place (x = 20, y = 120)
+
+ventana.mainloop()
